@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div id="download-form">
+        {% if errormessage is defined  %}
+            <div class="alert alert-danger" role="alert" id="error-alert">
+                {{ errormessage }}
+            </div>
+         {%  else %}
+            <div class="alert alert-success" role="alert" id="error-alert">
+                We successfully converted your file to a csv. <br>
+            </div>
+            <a href="/api/download/{{ jobid }}" class="btn btn-primary"><i class="fas fa-file-download"></i> Download CSV</a>
+             <a href="/" class="btn btn-primary">Show Homepage</a>
+        {% endif %}
+    </div><!-- /#download-form -->
+{% endblock %}

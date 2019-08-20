@@ -1,0 +1,6 @@
+.idea/
+vendor/
+var/cache/*
+var/uploads/*
+var/downloads/*
+!.gitkeep

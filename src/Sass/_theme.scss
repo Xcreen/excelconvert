@@ -1,0 +1,56 @@
+@import "variables";
+
+//Bootstrap
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  border-bottom: 1px solid transparent;
+}
+
+.tab-content {
+  border-bottom: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+  padding: 20px;
+}
+
+//Header
+.header {
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+//Footer
+.footer {
+  @media(min-width: 992px) {
+    bottom: 10px;
+    position: absolute;
+  }
+  a {
+    text-decoration: none;
+    &.paypal-donation-link,
+    &.github-profile-link{
+      margin-left: 20px;
+      @media (max-width: 576px) {
+        display: block;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+//Loading
+.loader {
+  border-bottom: 16px solid $border-color;
+  border-left: 16px solid $border-color;
+  border-right: 16px solid $border-color;
+  border-top: 16px solid $primary;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

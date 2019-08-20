@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="{{ lang is defined ? lang : 'en' }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="Description" content="{% block metaDescription %}ExcelConvert allows you to convert a excel-file to a clean csv.{% endblock %}">
+    <base href="{{ baseurl() }}">
+    <title>{% block title %}ExcelConvert{% endblock %}</title>
+    <link href="css/app.css" rel="preload" as="style">
+    <link rel="stylesheet" href="css/app.css">
+    {% block javascript %}
+        <script src="js/jquery-3.4.1.slim.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js" async></script>
+        <script src="js/browser-check.js" async></script>
+    {% endblock %}
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="container">
+            {% block headerContent %}
+                <div class="header">
+                    <img src="img/excelconvert_logo.png" class="img-fluid d-block mx-auto" alt="ExcelConvert-Logo">
+                </div><!-- /.header -->
+            {% endblock %}
+
+            {% block content %}
+            {% endblock %}
+
+            {% block footerContent %}
+                <div class="footer">
+                    <span class="copyright">Copyright &copy; 2019 by Xcreen</span>
+                    <a href="https://github.com/xcreen" rel="noopener" target="_blank" class="github-profile-link">
+                        <i class="fab fa-github"></i> Github Profile
+                    </a>
+                    <a href="https://www.paypal.me/xcreen" rel="noopener" target="_blank" class="paypal-donation-link">
+                        <i class="fab fa-paypal"></i> Donate via Paypal
+                    </a>
+                </div><!-- /.footer -->
+            {% endblock %}
+        </div><!-- /.container -->
+    </div><!-- /.page-wrapper -->
+</body>
+</html>
