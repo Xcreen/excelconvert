@@ -37,7 +37,7 @@ class HomeController extends AbstractController
                 'errormessage' => 'This job do not exist!'
             ])->withStatus(404);
         }
-        if(!file_exists(__DIR__ . '../../../var/downloads/' .  $job['public_job_id'] . '.csv')) {
+        if(!file_exists($_SERVER['DOCUMENT_ROOT'] . '/../var/downloads/' .  $job['public_job_id'] . '.csv')) {
             $response->withStatus(404);
             return $this->twig->render($response, 'download.html.twig', [
                 'errormessage' => 'This job do not exist!'

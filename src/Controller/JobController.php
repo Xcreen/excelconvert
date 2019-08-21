@@ -57,7 +57,7 @@ class JobController extends AbstractController
         $publicJobID = $jobModel->createJob($fileName, $fileExtension, $includeUTF8, $postData['delimiter']);
         //Move Excel-File
         $newFileName = $publicJobID . '.' . $fileExtension;
-        $excelFile->moveTo(__DIR__ . '../../../var/uploads/' . $newFileName);
+        $excelFile->moveTo($_SERVER['DOCUMENT_ROOT'] . '/../var/uploads/' . $newFileName);
 
         $response->getBody()->write(json_encode(['success' => true, 'job_id' => $publicJobID]));
         return $response->withHeader('Content-Type', 'application/json');
@@ -80,7 +80,7 @@ class JobController extends AbstractController
             ])->withStatus(404);
         }
 
-        $filePath = __DIR__ . '../../../var/downloads/' .  $job['public_job_id'] . '.csv';
+        $filePath = $_SERVER['DOCUMENT_ROOT'] . '/../var/downloads/' .  $job['public_job_id'] . '.csv';
         if(!file_exists($filePath)) {
             return $this->twig->render($response, 'download.html.twig', [
                 'errormessage' => 'This file do not exist!'
