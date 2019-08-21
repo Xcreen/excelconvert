@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Erstellungszeit: 20. Aug 2019 um 16:16
--- Server-Version: 10.1.38-MariaDB
--- PHP-Version: 7.2.15
+-- Host: localhost
+-- Erstellungszeit: 21. Aug 2019 um 08:37
+-- Server-Version: 10.4.7-MariaDB-1:10.4.7+maria~xenial-log
+-- PHP-Version: 7.3.8-1+ubuntu16.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,16 +30,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `jobs` (
   `job_id` int(11) NOT NULL,
-  `public_job_id` varchar(36) CHARACTER SET latin1 NOT NULL,
-  `filename` varchar(500) CHARACTER SET latin1 NOT NULL,
+  `public_job_id` varchar(36) NOT NULL,
+  `filename` varchar(500) NOT NULL,
   `fileextension` varchar(5) NOT NULL,
-  `option_include_utf8bom` tinyint(1) NOT NULL DEFAULT '1',
+  `option_include_utf8bom` tinyint(1) NOT NULL DEFAULT 1,
   `option_delimiter` varchar(1) NOT NULL DEFAULT ',',
-  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
   `date_start` timestamp NULL DEFAULT NULL,
   `date_finished` timestamp NULL DEFAULT NULL,
-  `job_status` enum('pending','in_progress','failed','finished') CHARACTER SET latin1 NOT NULL DEFAULT 'pending',
-  `failed_information` mediumtext CHARACTER SET latin1
+  `job_status` enum('pending','in_progress','failed','finished') NOT NULL DEFAULT 'pending',
+  `failed_information` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -51,6 +51,17 @@ CREATE TABLE `jobs` (
 --
 ALTER TABLE `jobs`
   ADD PRIMARY KEY (`job_id`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
