@@ -3,9 +3,9 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "ext-fileinfo": "*",
-        "slim/slim": "4.1",
-        "slim/psr7": "^0.4.0",
-        "slim/twig-view": "3.0.0-alpha",
+        "slim/slim": "4.2",
+        "slim/psr7": "^0.5.0",
+        "slim/twig-view": "3.0.0-beta",
         "php-di/php-di": "^6.0",
         "phpoffice/phpspreadsheet": "^1.9"
     },
