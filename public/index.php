@@ -12,8 +12,9 @@ use Twig\Extension\DebugExtension;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-//Config
-$displayErrorDetails = true;
+//Load Configuration
+$dotenv = Dotenv\Dotenv::create(__DIR__ . '/../');
+$dotenv->load();
 
 //Setup DI-Container
 $container = new Container();
@@ -28,16 +29,17 @@ $responseFactory = $app->getResponseFactory();
 //Set ErrorMiddleware
 $errorHandler = new HttpErrorHandler($callableResolver, $responseFactory);
 $app->addRoutingMiddleware();
-$errorMiddleware = $app->addErrorMiddleware($displayErrorDetails, false, false);
+$errorMiddleware = $app->addErrorMiddleware(getenv('SHOW_PHP_ERROR'), false, false);
 $errorMiddleware->setDefaultErrorHandler($errorHandler);
 
 //Register DI-Service
 $container->set('twigservice', function () {
+    $twigCache = getenv('TWIG_CACHE_PATH') !== 'false' ? getenv('TWIG_CACHE_PATH') : false ;
+
     $twig = new Twig('../src/Views', [
-        'cache' => '../var/cache',
-        //'cache' => false,
-        'auto_reload' => true,
-        'debug' => true
+        'cache' => $twigCache,
+        'auto_reload' => filter_var(getenv('TWIG_AUTO_RELOAD'), FILTER_VALIDATE_BOOLEAN),
+        'debug' => filter_var(getenv('TWIG_DEBUG'), FILTER_VALIDATE_BOOLEAN)
     ]);
     $twig->addExtension(new DebugExtension());
     $twig->addExtension(new TwigBaseURLExtension());
@@ -45,7 +47,8 @@ $container->set('twigservice', function () {
 });
 //Register PDO-Service
 $container->set('pdoservice', function () {
-    return new PDO('mysql:host=localhost;dbname=excelconvert', 'excelconvert', 'excelconvert');
+    return new PDO('mysql:host=' . getenv('MYSQL_HOST') . ';port=' . getenv('MYSQL_PORT') . ';dbname=' . getenv('MYSQL_DATABASE'),
+        getenv('MYSQL_USERNAME'), getenv('MYSQL_PASSWORD'));
 });
 
 //Register Routes

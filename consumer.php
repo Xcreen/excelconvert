@@ -8,13 +8,16 @@ use PhpOffice\PhpSpreadsheet\Writer\Csv;
 require __DIR__ . '/vendor/autoload.php';
 
 $eol = chr(0x0D) . chr(0x0A);
+$dotenv = Dotenv\Dotenv::create(__DIR__);
+$dotenv->load();
 $container = new Container();
 
 while(true) {
     echo 'Checking for new jobs ...'.$eol;
     try {
         $container->set('pdoservice', function () {
-            return new PDO('mysql:host=localhost;dbname=excelconvert', 'excelconvert', 'excelconvert');
+            return new PDO('mysql:host=' . getenv('MYSQL_HOST') . ';port=' . getenv('MYSQL_PORT') . ';dbname=' . getenv('MYSQL_DATABASE'),
+                getenv('MYSQL_USERNAME'), getenv('MYSQL_PASSWORD'));
         });
         $jobModel = new JobModel($container);
 
