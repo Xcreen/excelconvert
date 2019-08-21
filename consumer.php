@@ -25,16 +25,16 @@ while(true) {
             $jobModel->setStatus($jobID, 'in_progress');
             try {
                 $filename = $jobs[0]['public_job_id'] . '.' . $jobs[0]['fileextension'];
-                $reader = IOFactory::createReaderForFile('var/uploads/' . $filename);
+                $reader = IOFactory::createReaderForFile(__DIR__ . '/var/uploads/' . $filename);
 
                 $reader->setReadDataOnly(true);
-                $spreadsheet = $reader->load('var/uploads/' . $filename);
+                $spreadsheet = $reader->load(__DIR__ . '/var/uploads/' . $filename);
 
                 $writer = new Csv($spreadsheet);
                 $writer->setUseBOM($jobs[0]['option_include_utf8bom']);
                 $writer->setDelimiter($jobs[0]['option_delimiter']);
                 $writer->setLineEnding("\r\n");
-                $writer->save('var/downloads/' . $jobs[0]['public_job_id'] . '.' . 'csv');
+                $writer->save(__DIR__ . '/var/downloads/' . $jobs[0]['public_job_id'] . '.' . 'csv');
                 $jobModel->setStatus($jobID, 'finished');
                 echo 'Job finished!' . $eol;
             }
