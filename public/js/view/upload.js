@@ -10,7 +10,7 @@ jQuery(function($) {
     let $loadingText = $('#loading-text');
 
     $fileInput.on('change', function() {
-        $fileInputLabel.text($(this).val());
+        $fileInputLabel.text($(this)[0].files[0].name);
     });
 
     $uploadButton.on('click', function() {
